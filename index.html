@@ -1,796 +1,153 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>DevCodeSoham | AI/ML & Backend Developer</title>
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        :root {
-            --primary: #00ff41;
-            --secondary: #0a0e27;
-            --tertiary: #1a1f3a;
-            --accent: #ff006e;
-            --text-primary: #e0e0e0;
-            --text-secondary: #a0a0a0;
-            --border-color: #00ff4133;
-        }
-
-        body {
-            background: linear-gradient(135deg, #0a0e27 0%, #1a1f3a 100%);
-            color: var(--text-primary);
-            font-family: 'Courier New', monospace;
-            line-height: 1.6;
-            overflow-x: hidden;
-        }
-
-        /* Animated background */
-        body::before {
-            content: '';
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: 
-                radial-gradient(circle at 20% 50%, rgba(0, 255, 65, 0.03) 0%, transparent 50%),
-                radial-gradient(circle at 80% 80%, rgba(255, 0, 110, 0.03) 0%, transparent 50%);
-            pointer-events: none;
-            z-index: 1;
-        }
-
-        .content {
-            position: relative;
-            z-index: 2;
-        }
-
-        /* Navigation */
-        nav {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 2rem 5%;
-            backdrop-filter: blur(10px);
-            border-bottom: 1px solid var(--border-color);
-            position: sticky;
-            top: 0;
-            z-index: 100;
-        }
-
-        .logo {
-            font-size: 1.5rem;
-            font-weight: bold;
-            color: var(--primary);
-            letter-spacing: 2px;
-            text-shadow: 0 0 10px var(--primary);
-        }
-
-        nav ul {
-            display: flex;
-            list-style: none;
-            gap: 2rem;
-        }
-
-        nav a {
-            color: var(--text-secondary);
-            text-decoration: none;
-            transition: all 0.3s ease;
-            font-size: 0.9rem;
-        }
-
-        nav a:hover {
-            color: var(--primary);
-            text-shadow: 0 0 8px var(--primary);
-        }
-
-        .hire-btn {
-            background: var(--primary);
-            color: var(--secondary);
-            padding: 0.7rem 1.5rem;
-            border: none;
-            border-radius: 4px;
-            cursor: pointer;
-            font-weight: bold;
-            transition: all 0.3s ease;
-            font-size: 0.9rem;
-        }
-
-        .hire-btn:hover {
-            background: var(--accent);
-            box-shadow: 0 0 20px var(--accent);
-        }
-
-        /* Hero Section */
-        .hero {
-            min-height: 100vh;
-            display: flex;
-            align-items: center;
-            padding: 5% 5%;
-            gap: 5%;
-        }
-
-        .hero-content h1 {
-            font-size: 3.5rem;
-            line-height: 1.2;
-            margin-bottom: 1.5rem;
-            animation: fadeInUp 0.8s ease;
-        }
-
-        .hero-content h1 span {
-            color: var(--primary);
-            text-shadow: 0 0 20px var(--primary);
-        }
-
-        .hero-content p {
-            font-size: 1.1rem;
-            color: var(--text-secondary);
-            margin-bottom: 2rem;
-            max-width: 500px;
-            animation: fadeInUp 0.8s ease 0.2s both;
-        }
-
-        .cta-buttons {
-            display: flex;
-            gap: 1rem;
-            animation: fadeInUp 0.8s ease 0.4s both;
-        }
-
-        .btn {
-            padding: 1rem 2rem;
-            border: 2px solid var(--primary);
-            background: transparent;
-            color: var(--primary);
-            cursor: pointer;
-            font-size: 1rem;
-            transition: all 0.3s ease;
-            font-family: 'Courier New', monospace;
-            border-radius: 4px;
-        }
-
-        .btn:hover {
-            background: var(--primary);
-            color: var(--secondary);
-            box-shadow: 0 0 20px var(--primary);
-        }
-
-        .btn.primary {
-            background: var(--primary);
-            color: var(--secondary);
-        }
-
-        .btn.primary:hover {
-            background: var(--accent);
-            border-color: var(--accent);
-            box-shadow: 0 0 20px var(--accent);
-        }
-
-        .hero-image {
-            flex: 1;
-            animation: float 3s ease-in-out infinite;
-        }
-
-        .hero-image img {
-            width: 100%;
-            max-width: 400px;
-            filter: drop-shadow(0 0 30px rgba(0, 255, 65, 0.3));
-            border-radius: 8px;
-        }
-
-        /* Status Line */
-        .status {
-            display: flex;
-            align-items: center;
-            gap: 1rem;
-            margin-bottom: 2rem;
-            animation: fadeInUp 0.8s ease both;
-        }
-
-        .status-dot {
-            width: 12px;
-            height: 12px;
-            background: var(--primary);
-            border-radius: 50%;
-            animation: pulse 2s ease-in-out infinite;
-            box-shadow: 0 0 10px var(--primary);
-        }
-
-        @keyframes pulse {
-            0%, 100% { opacity: 1; }
-            50% { opacity: 0.5; }
-        }
-
-        .status-text {
-            color: var(--text-secondary);
-            font-size: 0.9rem;
-        }
-
-        /* Sections */
-        section {
-            padding: 5% 5%;
-            border-top: 1px solid var(--border-color);
-        }
-
-        section h2 {
-            font-size: 2.5rem;
-            margin-bottom: 3rem;
-            color: var(--primary);
-            text-shadow: 0 0 15px rgba(0, 255, 65, 0.5);
-        }
-
-        /* Tech Stack */
-        .tech-stack {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-            gap: 1.5rem;
-            margin-bottom: 3rem;
-        }
-
-        .tech-card {
-            background: rgba(0, 255, 65, 0.05);
-            border: 1px solid var(--border-color);
-            padding: 1.5rem;
-            border-radius: 8px;
-            transition: all 0.3s ease;
-            text-align: center;
-        }
-
-        .tech-card:hover {
-            background: rgba(0, 255, 65, 0.1);
-            border-color: var(--primary);
-            box-shadow: 0 0 20px rgba(0, 255, 65, 0.3);
-            transform: translateY(-5px);
-        }
-
-        .tech-card h3 {
-            color: var(--primary);
-            margin-bottom: 0.5rem;
-            font-size: 1.1rem;
-        }
-
-        .tech-card p {
-            font-size: 0.85rem;
-            color: var(--text-secondary);
-        }
-
-        /* Projects */
-        .projects-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 2rem;
-        }
-
-        .project-card {
-            background: rgba(26, 31, 58, 0.8);
-            border: 1px solid var(--border-color);
-            border-radius: 8px;
-            overflow: hidden;
-            transition: all 0.3s ease;
-            cursor: pointer;
-        }
-
-        .project-card:hover {
-            border-color: var(--primary);
-            box-shadow: 0 0 30px rgba(0, 255, 65, 0.3);
-            transform: translateY(-10px);
-        }
-
-        .project-image {
-            width: 100%;
-            height: 200px;
-            background: linear-gradient(135deg, rgba(0, 255, 65, 0.1), rgba(255, 0, 110, 0.1));
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 2rem;
-            border-bottom: 1px solid var(--border-color);
-        }
-
-        .project-content {
-            padding: 2rem;
-        }
-
-        .project-content h3 {
-            color: var(--primary);
-            margin-bottom: 1rem;
-            font-size: 1.3rem;
-        }
-
-        .project-content p {
-            color: var(--text-secondary);
-            margin-bottom: 1.5rem;
-            font-size: 0.9rem;
-            line-height: 1.6;
-        }
-
-        .project-tags {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 0.5rem;
-        }
-
-        .tag {
-            background: rgba(0, 255, 65, 0.1);
-            border: 1px solid var(--primary);
-            color: var(--primary);
-            padding: 0.3rem 0.8rem;
-            border-radius: 20px;
-            font-size: 0.75rem;
-            transition: all 0.3s ease;
-        }
-
-        .tag:hover {
-            background: var(--primary);
-            color: var(--secondary);
-        }
-
-        /* Skills */
-        .skills-container {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 2rem;
-        }
-
-        .skill-domain {
-            background: rgba(0, 255, 65, 0.03);
-            border: 1px solid var(--border-color);
-            padding: 2rem;
-            border-radius: 8px;
-            transition: all 0.3s ease;
-        }
-
-        .skill-domain:hover {
-            background: rgba(0, 255, 65, 0.08);
-            border-color: var(--primary);
-        }
-
-        .skill-domain h3 {
-            color: var(--primary);
-            margin-bottom: 1rem;
-            font-size: 1.2rem;
-        }
-
-        .skill-domain p {
-            color: var(--text-secondary);
-            font-size: 0.9rem;
-            line-height: 1.6;
-        }
-
-        /* Stats */
-        .stats-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 2rem;
-            margin: 3rem 0;
-        }
-
-        .stat-box {
-            background: rgba(0, 255, 65, 0.05);
-            border: 1px solid var(--border-color);
-            padding: 2rem;
-            border-radius: 8px;
-            text-align: center;
-            transition: all 0.3s ease;
-        }
-
-        .stat-box:hover {
-            background: rgba(0, 255, 65, 0.1);
-            border-color: var(--primary);
-            transform: scale(1.05);
-        }
-
-        .stat-number {
-            font-size: 2.5rem;
-            color: var(--primary);
-            font-weight: bold;
-            margin-bottom: 0.5rem;
-            text-shadow: 0 0 10px var(--primary);
-        }
-
-        .stat-label {
-            color: var(--text-secondary);
-            font-size: 0.9rem;
-        }
-
-        /* Contact Section */
-        .contact-section {
-            text-align: center;
-            padding: 5% 5%;
-        }
-
-        .contact-section h2 {
-            margin-bottom: 2rem;
-        }
-
-        .contact-links {
-            display: flex;
-            justify-content: center;
-            gap: 2rem;
-            flex-wrap: wrap;
-            margin-bottom: 3rem;
-        }
-
-        .contact-link {
-            color: var(--text-secondary);
-            text-decoration: none;
-            padding: 1rem 2rem;
-            border: 1px solid var(--border-color);
-            border-radius: 4px;
-            transition: all 0.3s ease;
-            display: inline-block;
-        }
-
-        .contact-link:hover {
-            color: var(--primary);
-            border-color: var(--primary);
-            box-shadow: 0 0 15px rgba(0, 255, 65, 0.3);
-        }
-
-        /* Footer */
-        footer {
-            text-align: center;
-            padding: 2rem 5%;
-            border-top: 1px solid var(--border-color);
-            color: var(--text-secondary);
-            font-size: 0.85rem;
-        }
-
-        footer p {
-            margin: 0.5rem 0;
-        }
-
-        /* Animations */
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        @keyframes float {
-            0%, 100% { transform: translateY(0px); }
-            50% { transform: translateY(-20px); }
-        }
-
-        @keyframes slideIn {
-            from {
-                opacity: 0;
-                transform: translateX(-30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateX(0);
-            }
-        }
-
-        /* Responsive */
-        @media (max-width: 768px) {
-            .hero {
-                flex-direction: column;
-                text-align: center;
-            }
-
-            .hero-content h1 {
-                font-size: 2rem;
-            }
-
-            .cta-buttons {
-                justify-content: center;
-            }
-
-            nav ul {
-                gap: 1rem;
-                font-size: 0.8rem;
-            }
-
-            section h2 {
-                font-size: 1.8rem;
-            }
-
-            .hero-image {
-                order: -1;
-            }
-        }
-    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Soham | AI/ML & Backend Developer</title>
+
+<style>
+body {
+    margin:0;
+    font-family: 'Segoe UI', sans-serif;
+    background:#0a0e27;
+    color:#e0e0e0;
+}
+
+nav {
+    display:flex;
+    justify-content:space-between;
+    padding:20px 5%;
+    border-bottom:1px solid #00ff4133;
+}
+
+.logo { color:#00ff41; font-weight:bold; }
+
+.hero {
+    text-align:center;
+    padding:80px 20px;
+}
+
+.hero h1 span { color:#00ff41; }
+
+.btn {
+    padding:10px 20px;
+    border:1px solid #00ff41;
+    color:#00ff41;
+    text-decoration:none;
+    margin:10px;
+    display:inline-block;
+}
+
+.btn:hover { background:#00ff41; color:#000; }
+
+section { padding:50px 5%; }
+
+.projects {
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+    gap:20px;
+}
+
+.card {
+    border:1px solid #00ff4133;
+    padding:20px;
+}
+
+a { color:#00ff41; }
+
+footer {
+    text-align:center;
+    padding:20px;
+    border-top:1px solid #00ff4133;
+}
+</style>
 </head>
+
 <body>
-    <div class="content">
-        <!-- Navigation -->
-        <nav>
-            <div class="logo">&gt; DevCodeSoham.exe</div>
-            <ul>
-                <li><a href="#about">ABOUT</a></li>
-                <li><a href="#skills">SKILLS</a></li>
-                <li><a href="#projects">PROJECTS</a></li>
-                <li><a href="#contact">CONTACT</a></li>
-            </ul>
-            <button class="hire-btn">HIRE ME</button>
-        </nav>
 
-        <!-- Hero Section -->
-        <section class="hero" id="about">
-            <div class="hero-content">
-                <div class="status">
-                    <div class="status-dot"></div>
-                    <span class="status-text">SYSTEM STATUS: ONLINE</span>
-                </div>
-                
-                <h1>AI/ML <span>ENGINEER</span> <br>& Backend <span>DEVELOPER</span></h1>
-                
-                <p>I build intelligent systems and scalable APIs that solve real-world problems. Passionate about machine learning, data-driven solutions, and clean code.</p>
+<nav>
+<div class="logo">DevCodeSoham</div>
+</nav>
 
-                <div class="cta-buttons">
-                    <button class="btn primary">VIEW PROJECTS</button>
-                    <button class="btn">DOWNLOAD CV</button>
-                </div>
-            </div>
+<section class="hero">
+<h1>Hi, I'm <span>Soham</span></h1>
+<p>AI/ML Engineer & Backend Developer</p>
 
-            <div class="hero-image">
-                <div style="width: 100%; height: 300px; background: linear-gradient(135deg, rgba(0, 255, 65, 0.1), rgba(255, 0, 110, 0.1)); border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 100px;">
-                    🤖
-                </div>
-            </div>
-        </section>
+<p>
+I build intelligent systems, scalable APIs, and real-world solutions.
+</p>
 
-        <!-- About Section -->
-        <section style="padding: 5% 5%; text-align: center;">
-            <h2>WHO AM I?</h2>
-            <p style="max-width: 700px; margin: 0 auto; color: var(--text-secondary); font-size: 1.1rem; line-height: 1.8;">
-                I'm a passionate developer focused on building intelligent systems and scalable backend architectures. 
-                As a student developer, I'm continuously learning and exploring the cutting edge of AI/ML and software engineering. 
-                I believe in writing clean code, solving complex problems, and making technology work for people.
-            </p>
+<p style="color:#00ff41;">
+🚀 15+ Projects • AI/ML • Backend Systems
+</p>
 
-            <!-- Stats -->
-            <div class="stats-grid">
-                <div class="stat-box">
-                    <div class="stat-number">15+</div>
-                    <div class="stat-label">Projects Built</div>
-                </div>
-                <div class="stat-box">
-                    <div class="stat-number">50K+</div>
-                    <div class="stat-label">Lines of Code</div>
-                </div>
-                <div class="stat-box">
-                    <div class="stat-number">7</div>
-                    <div class="stat-label">Languages Mastered</div>
-                </div>
-                <div class="stat-box">
-                    <div class="stat-number">100%</div>
-                    <div class="stat-label">Commitment to Quality</div>
-                </div>
-            </div>
-        </section>
+<a href="#projects" class="btn">View Projects</a>
+<a href="#" class="btn">Download CV</a>
+</section>
 
-        <!-- Tech Stack -->
-        <section id="skills">
-            <h2>TECH STACK</h2>
-            <div class="tech-stack">
-                <div class="tech-card">
-                    <h3>Python</h3>
-                    <p>Advanced</p>
-                </div>
-                <div class="tech-card">
-                    <h3>TensorFlow</h3>
-                    <p>ML Framework</p>
-                </div>
-                <div class="tech-card">
-                    <h3>PyTorch</h3>
-                    <p>Deep Learning</p>
-                </div>
-                <div class="tech-card">
-                    <h3>FastAPI</h3>
-                    <p>Backend APIs</p>
-                </div>
-                <div class="tech-card">
-                    <h3>Django</h3>
-                    <p>Web Framework</p>
-                </div>
-                <div class="tech-card">
-                    <h3>PostgreSQL</h3>
-                    <p>Database</p>
-                </div>
-                <div class="tech-card">
-                    <h3>Docker</h3>
-                    <p>Containerization</p>
-                </div>
-                <div class="tech-card">
-                    <h3>Pandas</h3>
-                    <p>Data Science</p>
-                </div>
-                <div class="tech-card">
-                    <h3>Git</h3>
-                    <p>Version Control</p>
-                </div>
-                <div class="tech-card">
-                    <h3>REST APIs</h3>
-                    <p>API Design</p>
-                </div>
-                <div class="tech-card">
-                    <h3>JavaScript</h3>
-                    <p>Frontend</p>
-                </div>
-                <div class="tech-card">
-                    <h3>NumPy</h3>
-                    <p>Numerical Computing</p>
-                </div>
-            </div>
+<section>
+<h2>🧠 About Me</h2>
+<p>
+Focused on building AI-powered systems and scalable backend architectures.
+Passionate about solving real-world problems with clean and efficient code.
+</p>
+</section>
 
-            <!-- Skills Domains -->
-            <h2 style="margin-top: 3rem;">CORE SKILLS</h2>
-            <div class="skills-container">
-                <div class="skill-domain">
-                    <h3>🤖 ML/AI</h3>
-                    <p>Building intelligent systems using deep learning, computer vision, and model optimization techniques.</p>
-                </div>
-                <div class="skill-domain">
-                    <h3>🔌 Backend Systems</h3>
-                    <p>Designing scalable APIs, microservices, and robust backend architectures with Python & Node.js.</p>
-                </div>
-                <div class="skill-domain">
-                    <h3>📊 Data Science</h3>
-                    <p>Extracting insights from data using Python, Pandas, and advanced data processing pipelines.</p>
-                </div>
-                <div class="skill-domain">
-                    <h3>🔧 Problem Solving</h3>
-                    <p>Solving complex problems using optimized algorithms and efficient data structures.</p>
-                </div>
-                <div class="skill-domain">
-                    <h3>☁️ Deployment</h3>
-                    <p>Containerizing and deploying applications using Docker, AWS, and cloud platforms.</p>
-                </div>
-                <div class="skill-domain">
-                    <h3>📚 Continuous Learning</h3>
-                    <p>Always exploring new technologies, frameworks, and best practices in AI/ML and software engineering.</p>
-                </div>
-            </div>
-        </section>
+<section>
+<h2>⚡ Tech Stack</h2>
+<p>Python • FastAPI • Django • TensorFlow • PyTorch • PostgreSQL • Docker</p>
+</section>
 
-        <!-- Projects -->
-        <section id="projects">
-            <h2>FEATURED PROJECTS</h2>
-            <div class="projects-grid">
-                <div class="project-card">
-                    <div class="project-image">📈</div>
-                    <div class="project-content">
-                        <h3>Smart Prediction Model</h3>
-                        <p>Machine learning model for predictive analytics using advanced algorithms and data processing pipelines.</p>
-                        <div class="project-tags">
-                            <span class="tag">Python</span>
-                            <span class="tag">TensorFlow</span>
-                            <span class="tag">ML</span>
-                        </div>
-                    </div>
-                </div>
+<section id="projects">
+<h2>🚀 Projects</h2>
 
-                <div class="project-card">
-                    <div class="project-image">🔗</div>
-                    <div class="project-content">
-                        <h3>REST API Service</h3>
-                        <p>Scalable RESTful API built with FastAPI, featuring authentication, caching, and advanced data handling.</p>
-                        <div class="project-tags">
-                            <span class="tag">FastAPI</span>
-                            <span class="tag">Backend</span>
-                            <span class="tag">Python</span>
-                        </div>
-                    </div>
-                </div>
+<div class="projects">
 
-                <div class="project-card">
-                    <div class="project-image">🧠</div>
-                    <div class="project-content">
-                        <h3>NLP Classification System</h3>
-                        <p>Natural language processing system for text classification using transformer models and deep learning.</p>
-                        <div class="project-tags">
-                            <span class="tag">NLP</span>
-                            <span class="tag">PyTorch</span>
-                            <span class="tag">ML</span>
-                        </div>
-                    </div>
-                </div>
+<div class="card">
+<h3>ML Prediction Model</h3>
+<p>Predictive analytics using machine learning</p>
+<a href="https://github.com/your-repo-link">View Code</a>
+</div>
 
-                <div class="project-card">
-                    <div class="project-image">💾</div>
-                    <div class="project-content">
-                        <h3>Data Pipeline</h3>
-                        <p>End-to-end data processing pipeline for ETL operations with optimized database queries.</p>
-                        <div class="project-tags">
-                            <span class="tag">Python</span>
-                            <span class="tag">Pandas</span>
-                            <span class="tag">PostgreSQL</span>
-                        </div>
-                    </div>
-                </div>
+<div class="card">
+<h3>REST API Service</h3>
+<p>Scalable backend with FastAPI</p>
+<a href="https://github.com/your-repo-link">View Code</a>
+</div>
 
-                <div class="project-card">
-                    <div class="project-image">🎯</div>
-                    <div class="project-content">
-                        <h3>Computer Vision App</h3>
-                        <p>Real-time object detection and image processing application using OpenCV and deep learning.</p>
-                        <div class="project-tags">
-                            <span class="tag">OpenCV</span>
-                            <span class="tag">TensorFlow</span>
-                            <span class="tag">Python</span>
-                        </div>
-                    </div>
-                </div>
+<div class="card">
+<h3>NLP Classifier</h3>
+<p>Deep learning text classification</p>
+<a href="https://github.com/your-repo-link">View Code</a>
+</div>
 
-                <div class="project-card">
-                    <div class="project-image">🚀</div>
-                    <div class="project-content">
-                        <h3>Microservices Architecture</h3>
-                        <p>Distributed system with containerized microservices, Docker, and orchestration best practices.</p>
-                        <div class="project-tags">
-                            <span class="tag">Docker</span>
-                            <span class="tag">Backend</span>
-                            <span class="tag">Kubernetes</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
+<div class="card">
+<h3>Computer Vision App</h3>
+<p>Real-time object detection system</p>
+<a href="https://github.com/your-repo-link">View Code</a>
+</div>
 
-        <!-- Contact Section -->
-        <section class="contact-section" id="contact">
-            <h2>LET'S BUILD SOMETHING AWESOME</h2>
-            <p style="color: var(--text-secondary); margin-bottom: 2rem; font-size: 1.1rem;">
-                I'm always interested in hearing about new projects and opportunities.
-            </p>
-            
-            <div class="contact-links">
-                <a href="mailto:your-email@example.com" class="contact-link">📧 EMAIL ME</a>
-                <a href="https://linkedin.com/in/your-profile" class="contact-link">💼 LINKEDIN</a>
-                <a href="https://github.com/DevCodeSoham" class="contact-link">🐙 GITHUB</a>
-                <a href="https://twitter.com" class="contact-link">𝕏 TWITTER</a>
-            </div>
-        </section>
+</div>
+</section>
 
-        <!-- Footer -->
-        <footer>
-            <p>&gt; DevCodeSoham.exe // AI/ML Engineer & Backend Developer</p>
-            <p>© 2026 All rights reserved. No cookies, no trackers, just code.</p>
-            <p>Designed with ❤️ and crafted with ☕</p>
-        </footer>
-    </div>
+<section>
+<h2>🧩 Current Focus</h2>
+<ul>
+<li>Advanced Machine Learning</li>
+<li>Backend System Design</li>
+<li>Cloud Deployment</li>
+</ul>
+</section>
 
-    <script>
-        // Smooth scrolling
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                const target = document.querySelector(this.getAttribute('href'));
-                if (target) {
-                    target.scrollIntoView({ behavior: 'smooth' });
-                }
-            });
-        });
+<section>
+<h2>📫 Contact</h2>
+<p>Email: your-email@example.com</p>
+<p>LinkedIn: https://linkedin.com/in/your-profile</p>
+</section>
 
-        // Add scroll animation to elements
-        const observerOptions = {
-            threshold: 0.1,
-            rootMargin: '0px 0px -50px 0px'
-        };
+<footer>
+<p>Built with precision. Powered by curiosity.</p>
+</footer>
 
-        const observer = new IntersectionObserver(function(entries) {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.style.animation = 'slideIn 0.6s ease forwards';
-                    observer.unobserve(entry.target);
-                }
-            });
-        }, observerOptions);
-
-        document.querySelectorAll('.project-card, .tech-card, .skill-domain').forEach(el => {
-            observer.observe(el);
-        });
-    </script>
 </body>
 </html>
