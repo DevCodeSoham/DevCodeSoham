@@ -4,150 +4,968 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Soham | AI/ML & Backend Developer</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500&display=swap" rel="stylesheet">
 
 <style>
+:root {
+  --bg:          #FDFAF4;
+  --bg2:         #F5EDD8;
+  --bg3:         #EDE0C4;
+  --text1:       #1C0F05;
+  --text2:       #6B4A30;
+  --text3:       #A07850;
+  --accent:      #9B4F1E;
+  --accent2:     #C8834A;
+  --gold:        #D4A84B;
+  --border:      rgba(155,79,30,0.18);
+  --border2:     rgba(155,79,30,0.35);
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+
 body {
-    margin:0;
-    font-family: 'Segoe UI', sans-serif;
-    background:#0a0e27;
-    color:#e0e0e0;
+  background: var(--bg);
+  color: var(--text1);
+  font-family: 'DM Sans', sans-serif;
+  font-weight: 300;
+  overflow-x: hidden;
+  line-height: 1.7;
 }
 
+/* ========== GLOBAL BG CANVAS ========== */
+#bg-canvas {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  overflow: hidden;
+}
+
+.bg-circle-1 {
+  position: absolute;
+  width: 700px; height: 700px;
+  border-radius: 50%;
+  top: -200px; right: -180px;
+  background: radial-gradient(circle at 40% 40%, #E8C98A44 0%, #D4A84B18 40%, transparent 70%);
+  animation: floatA 18s ease-in-out infinite;
+}
+.bg-circle-2 {
+  position: absolute;
+  width: 500px; height: 500px;
+  border-radius: 50%;
+  bottom: 5%; left: -150px;
+  background: radial-gradient(circle, #C8834A22 0%, transparent 70%);
+  animation: floatB 22s ease-in-out infinite;
+}
+.bg-circle-3 {
+  position: absolute;
+  width: 320px; height: 320px;
+  border-radius: 50%;
+  top: 55%; right: 8%;
+  background: radial-gradient(circle, #9B4F1E14 0%, transparent 70%);
+  animation: floatA 26s ease-in-out infinite reverse;
+}
+
+@keyframes floatA {
+  0%,100% { transform: translate(0,0) scale(1); }
+  33%      { transform: translate(30px,-40px) scale(1.04); }
+  66%      { transform: translate(-20px,25px) scale(0.97); }
+}
+@keyframes floatB {
+  0%,100% { transform: translate(0,0) scale(1); }
+  50%      { transform: translate(40px,-30px) scale(1.06); }
+}
+
+.bg-lines {
+  position: absolute;
+  inset: 0;
+  background-image:
+    repeating-linear-gradient(
+      45deg,
+      transparent,
+      transparent 60px,
+      rgba(155,79,30,0.028) 60px,
+      rgba(155,79,30,0.028) 61px
+    );
+}
+
+.bg-dots {
+  position: absolute;
+  inset: 0;
+  background-image: radial-gradient(circle, rgba(155,79,30,0.10) 1px, transparent 1px);
+  background-size: 42px 42px;
+  background-position: 21px 21px;
+  mask-image: radial-gradient(ellipse 80% 80% at 50% 50%, black 20%, transparent 80%);
+}
+
+.bg-ring {
+  position: absolute;
+  border-radius: 50%;
+  border: 1px solid rgba(155,79,30,0.10);
+}
+.bg-ring-1 { width:260px;height:260px; top:-80px; left:-80px; }
+.bg-ring-2 { width:180px;height:180px; top:-30px; left:-30px; }
+.bg-ring-3 { width:440px;height:440px; bottom:-120px; right:-120px; }
+.bg-ring-4 { width:280px;height:280px; bottom:-60px; right:-60px; }
+
+.bg-hline {
+  position: absolute;
+  width: 1px;
+  height: 100%;
+  background: linear-gradient(to bottom, transparent 0%, rgba(155,79,30,0.10) 30%, rgba(155,79,30,0.10) 70%, transparent 100%);
+}
+.bg-hline-1 { left: 6%; }
+.bg-hline-2 { right: 6%; }
+
+/* ========== NAV ========== */
 nav {
-    display:flex;
-    justify-content:space-between;
-    padding:20px 5%;
-    border-bottom:1px solid #00ff4133;
+  position: sticky;
+  top: 0; z-index: 200;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 6%;
+  background: rgba(253,250,244,0.82);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border-bottom: 1px solid var(--border);
 }
 
-.logo { color:#00ff41; font-weight:bold; }
+.logo {
+  font-family: 'Cormorant Garamond', serif;
+  font-weight: 600;
+  font-size: 1.05rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--text1);
+  text-decoration: none;
+}
 
+.logo span { color: var(--accent); }
+
+.nav-links { display: flex; gap: 36px; list-style: none; }
+
+.nav-links a {
+  font-size: 0.75rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--text2);
+  text-decoration: none;
+  transition: color 0.2s;
+  position: relative;
+}
+
+.nav-links a::after {
+  content: '';
+  position: absolute;
+  left: 0; bottom: -3px;
+  width: 0; height: 1px;
+  background: var(--accent);
+  transition: width 0.25s;
+}
+
+.nav-links a:hover { color: var(--accent); }
+.nav-links a:hover::after { width: 100%; }
+
+/* ========== HERO ========== */
 .hero {
-    text-align:center;
-    padding:80px 20px;
+  position: relative;
+  z-index: 1;
+  min-height: 94vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 100px 6% 80px;
+  overflow: hidden;
 }
 
-.hero h1 span { color:#00ff41; }
+.hero-ghost {
+  position: absolute;
+  right: 3%;
+  top: 50%;
+  transform: translateY(-50%);
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(180px, 22vw, 320px);
+  font-weight: 600;
+  color: transparent;
+  -webkit-text-stroke: 1px rgba(155,79,30,0.08);
+  line-height: 1;
+  user-select: none;
+  pointer-events: none;
+  letter-spacing: -0.04em;
+}
+
+.hero-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.72rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 32px;
+}
+
+.hero-tag::before {
+  content: '';
+  display: inline-block;
+  width: 28px; height: 1px;
+  background: var(--accent);
+}
+
+.hero h1 {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(4rem, 9vw, 8rem);
+  font-weight: 300;
+  line-height: 0.95;
+  letter-spacing: -0.02em;
+  color: var(--text1);
+  margin-bottom: 20px;
+}
+
+.hero h1 em {
+  font-style: italic;
+  color: var(--accent);
+  position: relative;
+}
+
+.hero h1 em::after {
+  content: '';
+  position: absolute;
+  left: 0; bottom: 4px;
+  width: 100%; height: 3px;
+  background: linear-gradient(90deg, var(--accent) 0%, var(--gold) 100%);
+  opacity: 0.4;
+  border-radius: 2px;
+}
+
+.hero-sub {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(1.2rem, 2.2vw, 1.7rem);
+  font-style: italic;
+  font-weight: 300;
+  color: var(--text2);
+  margin-bottom: 24px;
+  max-width: 480px;
+}
+
+.hero-desc {
+  font-size: 0.9rem;
+  color: var(--text2);
+  max-width: 420px;
+  line-height: 1.85;
+  margin-bottom: 44px;
+}
+
+.hero-cta {
+  display: flex;
+  gap: 14px;
+  flex-wrap: wrap;
+  align-items: center;
+  margin-bottom: 64px;
+}
 
 .btn {
-    padding:10px 20px;
-    border:1px solid #00ff41;
-    color:#00ff41;
-    text-decoration:none;
-    margin:10px;
-    display:inline-block;
+  padding: 12px 30px;
+  font-size: 0.76rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  text-decoration: none;
+  display: inline-block;
+  font-family: 'DM Sans', sans-serif;
+  font-weight: 400;
+  transition: all 0.25s;
+  cursor: pointer;
+  border: none;
 }
 
-.btn:hover { background:#00ff41; color:#000; }
-
-section { padding:50px 5%; }
-
-.projects {
-    display:grid;
-    grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
-    gap:20px;
+.btn-primary {
+  background: var(--text1);
+  color: var(--bg);
+  clip-path: polygon(0 0, calc(100% - 10px) 0, 100% 10px, 100% 100%, 10px 100%, 0 calc(100% - 10px));
 }
 
-.card {
-    border:1px solid #00ff4133;
-    padding:20px;
+.btn-primary:hover {
+  background: var(--accent);
+  transform: translateY(-2px);
 }
 
-a { color:#00ff41; }
+.btn-outline {
+  background: transparent;
+  color: var(--text1);
+  border: 1px solid var(--border2);
+}
 
+.btn-outline:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+  transform: translateY(-2px);
+}
+
+.hero-stats {
+  display: flex;
+  gap: 0;
+  border-top: 1px solid var(--border);
+  padding-top: 36px;
+  max-width: 560px;
+}
+
+.hero-stat {
+  flex: 1;
+  padding-right: 32px;
+  border-right: 1px solid var(--border);
+}
+
+.hero-stat:last-child { border-right: none; padding-right: 0; padding-left: 32px; }
+.hero-stat:first-child { padding-left: 0; }
+
+.hero-stat-n {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 2.6rem;
+  font-weight: 300;
+  color: var(--accent);
+  line-height: 1;
+  margin-bottom: 4px;
+}
+
+.hero-stat-l {
+  font-size: 0.74rem;
+  letter-spacing: 0.08em;
+  color: var(--text3);
+  text-transform: uppercase;
+}
+
+/* ========== MARQUEE ========== */
+.marquee-wrap {
+  position: relative;
+  z-index: 1;
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+  background: var(--bg2);
+  padding: 14px 0;
+  overflow: hidden;
+}
+
+.marquee-track {
+  display: flex;
+  width: max-content;
+  animation: marquee 28s linear infinite;
+}
+
+.marquee-item {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.05rem;
+  font-style: italic;
+  color: var(--text2);
+  padding: 0 40px;
+  white-space: nowrap;
+}
+
+.marquee-sep { color: var(--gold); padding: 0 8px; }
+
+@keyframes marquee {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
+}
+
+/* ========== SECTIONS ========== */
+section {
+  position: relative;
+  z-index: 1;
+  padding: 90px 6%;
+}
+
+section + section { border-top: 1px solid var(--border); }
+
+.sec-label {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 0.7rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 14px;
+}
+
+.sec-label::after {
+  content: '';
+  flex: 1;
+  max-width: 60px;
+  height: 1px;
+  background: var(--accent2);
+  opacity: 0.5;
+}
+
+.sec-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(2.2rem, 4vw, 3.4rem);
+  font-weight: 300;
+  line-height: 1.1;
+  color: var(--text1);
+  margin-bottom: 52px;
+  max-width: 560px;
+}
+
+/* ========== ABOUT ========== */
+.about-grid {
+  display: grid;
+  grid-template-columns: 1.1fr 1.6fr;
+  gap: 72px;
+  align-items: start;
+}
+
+.about-pull {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.65rem;
+  font-weight: 300;
+  font-style: italic;
+  color: var(--text1);
+  line-height: 1.5;
+  border-left: 3px solid var(--gold);
+  padding-left: 24px;
+}
+
+.about-body { font-size: 0.9rem; color: var(--text2); line-height: 1.9; }
+.about-body p + p { margin-top: 16px; }
+
+/* ========== STACK ========== */
+.stack-wrap {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
+  gap: 10px;
+}
+
+.stack-chip {
+  position: relative;
+  padding: 14px 10px;
+  text-align: center;
+  font-size: 0.8rem;
+  letter-spacing: 0.04em;
+  color: var(--text2);
+  background: var(--bg);
+  border: 1px solid var(--border);
+  cursor: default;
+  overflow: hidden;
+  transition: color 0.25s, border-color 0.25s;
+}
+
+.stack-chip::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, var(--bg2) 0%, var(--bg3) 100%);
+  opacity: 0;
+  transition: opacity 0.25s;
+}
+
+.stack-chip span { position: relative; z-index: 1; }
+
+.stack-chip:hover { color: var(--accent); border-color: var(--accent2); }
+.stack-chip:hover::before { opacity: 1; }
+
+/* ========== PROJECTS ========== */
+.projects-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2px;
+}
+
+.proj-card {
+  background: var(--bg);
+  border: 1px solid var(--border);
+  padding: 36px 32px 30px;
+  position: relative;
+  overflow: hidden;
+  transition: border-color 0.3s, background 0.3s;
+  cursor: default;
+}
+
+.proj-card:hover { border-color: var(--accent2); background: var(--bg2); }
+
+.proj-card::before {
+  content: '';
+  position: absolute;
+  top: 0; right: 0;
+  width: 0; height: 0;
+  border-style: solid;
+  border-width: 0 28px 28px 0;
+  border-color: transparent var(--bg) transparent transparent;
+  transition: border-color 0.3s;
+  z-index: 2;
+}
+
+.proj-card:hover::before { border-color: transparent var(--bg2) transparent transparent; }
+
+.proj-card::after {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, var(--accent), var(--gold));
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.35s cubic-bezier(0.4,0,0.2,1);
+}
+
+.proj-card:hover::after { transform: scaleX(1); }
+
+.proj-num {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 4.5rem;
+  font-weight: 300;
+  color: var(--border);
+  position: absolute;
+  top: 10px; right: 36px;
+  line-height: 1;
+  pointer-events: none;
+  transition: color 0.3s;
+}
+
+.proj-card:hover .proj-num { color: rgba(155,79,30,0.12); }
+
+.proj-tag {
+  font-size: 0.68rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 16px;
+}
+
+.proj-card h3 {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.6rem;
+  font-weight: 400;
+  color: var(--text1);
+  margin-bottom: 10px;
+  line-height: 1.2;
+}
+
+.proj-card p {
+  font-size: 0.86rem;
+  color: var(--text2);
+  line-height: 1.75;
+  margin-bottom: 28px;
+}
+
+.proj-link {
+  font-size: 0.74rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--text1);
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  transition: gap 0.2s, color 0.2s;
+}
+
+.proj-link::after { content: '→'; transition: transform 0.2s; }
+.proj-link:hover { color: var(--accent); gap: 12px; }
+
+/* ========== FOCUS ========== */
+.focus-list { list-style: none; }
+
+.focus-item {
+  display: flex;
+  align-items: center;
+  gap: 28px;
+  padding: 26px 0;
+  border-bottom: 1px solid var(--border);
+  transition: padding-left 0.3s;
+  cursor: default;
+}
+
+.focus-item:first-child { border-top: 1px solid var(--border); }
+.focus-item:hover { padding-left: 8px; }
+
+.focus-i {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.1rem;
+  font-style: italic;
+  color: var(--gold);
+  min-width: 28px;
+}
+
+.focus-text { font-size: 1rem; color: var(--text2); transition: color 0.2s; }
+.focus-item:hover .focus-text { color: var(--text1); }
+
+.focus-arrow {
+  margin-left: auto;
+  font-size: 1.1rem;
+  color: var(--border2);
+  opacity: 0;
+  transform: translateX(-8px);
+  transition: opacity 0.25s, transform 0.25s;
+}
+
+.focus-item:hover .focus-arrow { opacity: 1; transform: translateX(0); }
+
+/* ========== CONTACT ========== */
+.contact-wrap {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 80px;
+  align-items: start;
+}
+
+.contact-pull {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 2rem;
+  font-weight: 300;
+  font-style: italic;
+  color: var(--text1);
+  line-height: 1.4;
+  margin-bottom: 24px;
+}
+
+.contact-note { font-size: 0.88rem; color: var(--text2); line-height: 1.8; }
+
+.contact-fields { display: flex; flex-direction: column; gap: 0; }
+
+.contact-row {
+  display: flex;
+  gap: 20px;
+  align-items: baseline;
+  padding: 18px 0;
+  border-bottom: 1px solid var(--border);
+  transition: padding-left 0.25s;
+}
+
+.contact-row:first-child { border-top: 1px solid var(--border); }
+.contact-row:hover { padding-left: 6px; }
+
+.c-label {
+  font-size: 0.68rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--text3);
+  min-width: 80px;
+}
+
+.c-val { font-size: 0.9rem; color: var(--text1); text-decoration: none; transition: color 0.2s; }
+a.c-val:hover { color: var(--accent); }
+
+/* ========== AVAIL BADGE ========== */
+.avail-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  font-size: 0.74rem;
+  color: #5C7A4A;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  background: rgba(92,122,74,0.10);
+  border: 1px solid rgba(92,122,74,0.25);
+  padding: 6px 14px;
+  border-radius: 2px;
+}
+
+.avail-dot {
+  width: 7px; height: 7px;
+  border-radius: 50%;
+  background: #5C7A4A;
+  animation: pulse 2.2s infinite;
+}
+
+@keyframes pulse {
+  0%,100% { opacity:1; box-shadow: 0 0 0 0 rgba(92,122,74,0.4); }
+  50%      { opacity:0.7; box-shadow: 0 0 0 5px rgba(92,122,74,0); }
+}
+
+/* ========== FOOTER ========== */
 footer {
-    text-align:center;
-    padding:20px;
-    border-top:1px solid #00ff4133;
+  position: relative;
+  z-index: 1;
+  border-top: 1px solid var(--border);
+  padding: 28px 6%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: var(--bg2);
+}
+
+.foot-left { display: flex; flex-direction: column; gap: 4px; }
+
+.foot-brand {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--text1);
+}
+
+.foot-copy { font-size: 0.75rem; color: var(--text3); letter-spacing: 0.05em; }
+
+.foot-right {
+  font-family: 'Cormorant Garamond', serif;
+  font-style: italic;
+  font-size: 0.95rem;
+  color: var(--text2);
+}
+
+/* ========== SCROLL REVEAL ========== */
+.reveal {
+  opacity: 0;
+  transform: translateY(32px);
+  transition: opacity 0.75s ease, transform 0.75s ease;
+}
+
+.reveal.left  { transform: translateX(-32px); }
+.reveal.right { transform: translateX(32px); }
+.reveal.visible { opacity: 1; transform: none; }
+
+/* ========== RESPONSIVE ========== */
+@media (max-width: 900px) {
+  .about-grid, .contact-wrap { grid-template-columns: 1fr; gap: 36px; }
+  .projects-grid { grid-template-columns: 1fr; }
+  .nav-links { display: none; }
+  .hero-ghost { display: none; }
+  footer { flex-direction: column; gap: 10px; text-align: center; }
 }
 </style>
 </head>
-
 <body>
 
+<div id="bg-canvas" aria-hidden="true">
+  <div class="bg-lines"></div>
+  <div class="bg-dots"></div>
+  <div class="bg-circle-1"></div>
+  <div class="bg-circle-2"></div>
+  <div class="bg-circle-3"></div>
+  <div class="bg-ring bg-ring-1"></div>
+  <div class="bg-ring bg-ring-2"></div>
+  <div class="bg-ring bg-ring-3"></div>
+  <div class="bg-ring bg-ring-4"></div>
+  <div class="bg-hline bg-hline-1"></div>
+  <div class="bg-hline bg-hline-2"></div>
+</div>
+
 <nav>
-<div class="logo">DevCodeSoham</div>
+  <a href="#" class="logo">Dev<span>Code</span>Soham</a>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#stack">Stack</a></li>
+    <li><a href="#projects">Projects</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
 </nav>
 
-<section class="hero">
-<h1>Hi, I'm <span>Soham</span></h1>
-<p>AI/ML Engineer & Backend Developer</p>
+<section class="hero" style="border-top:none;">
+  <div class="hero-ghost" aria-hidden="true">S.</div>
 
-<p>
-I build intelligent systems, scalable APIs, and real-world solutions.
-</p>
+  <div class="reveal" style="transition-delay:0.05s;">
+    <span class="hero-tag">Available for opportunities</span>
+  </div>
 
-<p style="color:#00ff41;">
-🚀 15+ Projects • AI/ML • Backend Systems
-</p>
+  <div class="reveal" style="transition-delay:0.12s;">
+    <h1>Hi, I'm<br><em>Soham</em></h1>
+  </div>
 
-<a href="#projects" class="btn">View Projects</a>
-<a href="#" class="btn">Download CV</a>
+  <div class="reveal" style="transition-delay:0.2s;">
+    <p class="hero-sub">AI/ML Engineer &amp; Backend Developer</p>
+    <p class="hero-desc">I build intelligent systems, scalable APIs, and real-world solutions — turning complex problems into clean, efficient code.</p>
+  </div>
+
+  <div class="reveal" style="transition-delay:0.28s;">
+    <div class="hero-cta">
+      <a href="#projects" class="btn btn-primary">View Projects</a>
+      <a href="#" class="btn btn-outline">Download CV</a>
+      <span class="avail-badge"><span class="avail-dot"></span>Open to collaborate</span>
+    </div>
+    <div class="hero-stats">
+      <div class="hero-stat">
+        <div class="hero-stat-n">15+</div>
+        <div class="hero-stat-l">Projects</div>
+      </div>
+      <div class="hero-stat">
+        <div class="hero-stat-n">3+</div>
+        <div class="hero-stat-l">Years</div>
+      </div>
+      <div class="hero-stat">
+        <div class="hero-stat-n">&#8734;</div>
+        <div class="hero-stat-l">Curiosity</div>
+      </div>
+    </div>
+  </div>
 </section>
 
-<section>
-<h2>🧠 About Me</h2>
-<p>
-Focused on building AI-powered systems and scalable backend architectures.
-Passionate about solving real-world problems with clean and efficient code.
-</p>
+<div class="marquee-wrap" aria-hidden="true">
+  <div class="marquee-track">
+    <span class="marquee-item">Python <span class="marquee-sep">&#10022;</span></span>
+    <span class="marquee-item">Machine Learning <span class="marquee-sep">&#10022;</span></span>
+    <span class="marquee-item">FastAPI <span class="marquee-sep">&#10022;</span></span>
+    <span class="marquee-item">TensorFlow <span class="marquee-sep">&#10022;</span></span>
+    <span class="marquee-item">Backend Systems <span class="marquee-sep">&#10022;</span></span>
+    <span class="marquee-item">PyTorch <span class="marquee-sep">&#10022;</span></span>
+    <span class="marquee-item">Computer Vision <span class="marquee-sep">&#10022;</span></span>
+    <span class="marquee-item">PostgreSQL <span class="marquee-sep">&#10022;</span></span>
+    <span class="marquee-item">Deep Learning <span class="marquee-sep">&#10022;</span></span>
+    <span class="marquee-item">Docker <span class="marquee-sep">&#10022;</span></span>
+    <span class="marquee-item">NLP <span class="marquee-sep">&#10022;</span></span>
+    <span class="marquee-item">REST APIs <span class="marquee-sep">&#10022;</span></span>
+    <span class="marquee-item">Python <span class="marquee-sep">&#10022;</span></span>
+    <span class="marquee-item">Machine Learning <span class="marquee-sep">&#10022;</span></span>
+    <span class="marquee-item">FastAPI <span class="marquee-sep">&#10022;</span></span>
+    <span class="marquee-item">TensorFlow <span class="marquee-sep">&#10022;</span></span>
+    <span class="marquee-item">Backend Systems <span class="marquee-sep">&#10022;</span></span>
+    <span class="marquee-item">PyTorch <span class="marquee-sep">&#10022;</span></span>
+    <span class="marquee-item">Computer Vision <span class="marquee-sep">&#10022;</span></span>
+    <span class="marquee-item">PostgreSQL <span class="marquee-sep">&#10022;</span></span>
+    <span class="marquee-item">Deep Learning <span class="marquee-sep">&#10022;</span></span>
+    <span class="marquee-item">Docker <span class="marquee-sep">&#10022;</span></span>
+    <span class="marquee-item">NLP <span class="marquee-sep">&#10022;</span></span>
+    <span class="marquee-item">REST APIs <span class="marquee-sep">&#10022;</span></span>
+  </div>
+</div>
+
+<section id="about">
+  <div class="reveal">
+    <p class="sec-label">01 &mdash; About</p>
+    <h2 class="sec-title">Crafting systems that think &amp; scale</h2>
+  </div>
+  <div class="about-grid">
+    <div class="reveal left" style="transition-delay:0.1s;">
+      <p class="about-pull">"Solving real-world problems with clean, purposeful code."</p>
+    </div>
+    <div class="reveal right" style="transition-delay:0.15s;">
+      <div class="about-body">
+        <p>Focused on building AI-powered systems and scalable backend architectures. I approach every project with a balance of engineering rigour and creative problem-solving &mdash; from training deep learning models to deploying production-grade REST APIs.</p>
+        <p>Currently exploring advanced machine learning, distributed systems, and the intersection of AI with real-world applications. I believe the best code is the code nobody notices &mdash; fast, reliable, and invisible.</p>
+      </div>
+    </div>
+  </div>
 </section>
 
-<section>
-<h2>⚡ Tech Stack</h2>
-<p>Python • FastAPI • Django • TensorFlow • PyTorch • PostgreSQL • Docker</p>
+<section id="stack">
+  <div class="reveal">
+    <p class="sec-label">02 &mdash; Stack</p>
+    <h2 class="sec-title">Tools of the trade</h2>
+  </div>
+  <div class="stack-wrap reveal" style="transition-delay:0.1s;">
+    <div class="stack-chip"><span>Python</span></div>
+    <div class="stack-chip"><span>FastAPI</span></div>
+    <div class="stack-chip"><span>Django</span></div>
+    <div class="stack-chip"><span>TensorFlow</span></div>
+    <div class="stack-chip"><span>PyTorch</span></div>
+    <div class="stack-chip"><span>PostgreSQL</span></div>
+    <div class="stack-chip"><span>Docker</span></div>
+    <div class="stack-chip"><span>REST APIs</span></div>
+    <div class="stack-chip"><span>NumPy</span></div>
+    <div class="stack-chip"><span>Pandas</span></div>
+    <div class="stack-chip"><span>Scikit-learn</span></div>
+    <div class="stack-chip"><span>Git</span></div>
+  </div>
 </section>
 
 <section id="projects">
-<h2>🚀 Projects</h2>
-
-<div class="projects">
-
-<div class="card">
-<h3>ML Prediction Model</h3>
-<p>Predictive analytics using machine learning</p>
-<a href="https://github.com/your-repo-link">View Code</a>
-</div>
-
-<div class="card">
-<h3>REST API Service</h3>
-<p>Scalable backend with FastAPI</p>
-<a href="https://github.com/your-repo-link">View Code</a>
-</div>
-
-<div class="card">
-<h3>NLP Classifier</h3>
-<p>Deep learning text classification</p>
-<a href="https://github.com/your-repo-link">View Code</a>
-</div>
-
-<div class="card">
-<h3>Computer Vision App</h3>
-<p>Real-time object detection system</p>
-<a href="https://github.com/your-repo-link">View Code</a>
-</div>
-
-</div>
+  <div class="reveal">
+    <p class="sec-label">03 &mdash; Projects</p>
+    <h2 class="sec-title">Selected work</h2>
+  </div>
+  <div class="projects-grid">
+    <div class="proj-card reveal" style="transition-delay:0.05s;">
+      <span class="proj-num" aria-hidden="true">01</span>
+      <p class="proj-tag">Machine Learning</p>
+      <h3>ML Prediction Model</h3>
+      <p>Predictive analytics pipeline using machine learning &mdash; from feature engineering to model deployment with production-ready inference.</p>
+      <a href="https://github.com/your-repo-link" class="proj-link">View on GitHub</a>
+    </div>
+    <div class="proj-card reveal" style="transition-delay:0.12s;">
+      <span class="proj-num" aria-hidden="true">02</span>
+      <p class="proj-tag">Backend</p>
+      <h3>REST API Service</h3>
+      <p>Scalable, production-ready backend service built with FastAPI &mdash; async, fully documented, containerised and cloud-deployable.</p>
+      <a href="https://github.com/your-repo-link" class="proj-link">View on GitHub</a>
+    </div>
+    <div class="proj-card reveal" style="transition-delay:0.19s;">
+      <span class="proj-num" aria-hidden="true">03</span>
+      <p class="proj-tag">NLP &middot; Deep Learning</p>
+      <h3>NLP Classifier</h3>
+      <p>Deep learning text classification model trained on domain-specific data with transformer fine-tuning for high accuracy.</p>
+      <a href="https://github.com/your-repo-link" class="proj-link">View on GitHub</a>
+    </div>
+    <div class="proj-card reveal" style="transition-delay:0.26s;">
+      <span class="proj-num" aria-hidden="true">04</span>
+      <p class="proj-tag">Computer Vision</p>
+      <h3>Computer Vision App</h3>
+      <p>Real-time object detection system with an optimised inference pipeline and intuitive interface for live video streams.</p>
+      <a href="https://github.com/your-repo-link" class="proj-link">View on GitHub</a>
+    </div>
+  </div>
 </section>
 
-<section>
-<h2>🧩 Current Focus</h2>
-<ul>
-<li>Advanced Machine Learning</li>
-<li>Backend System Design</li>
-<li>Cloud Deployment</li>
-</ul>
+<section id="focus">
+  <div class="reveal">
+    <p class="sec-label">04 &mdash; Currently</p>
+    <h2 class="sec-title">What I'm exploring</h2>
+  </div>
+  <ul class="focus-list reveal" style="transition-delay:0.1s;">
+    <li class="focus-item">
+      <span class="focus-i">i.</span>
+      <span class="focus-text">Advanced Machine Learning &amp; model optimisation</span>
+      <span class="focus-arrow">&#8594;</span>
+    </li>
+    <li class="focus-item">
+      <span class="focus-i">ii.</span>
+      <span class="focus-text">Backend System Design &amp; distributed architecture</span>
+      <span class="focus-arrow">&#8594;</span>
+    </li>
+    <li class="focus-item">
+      <span class="focus-i">iii.</span>
+      <span class="focus-text">Cloud Deployment, CI/CD &amp; MLOps pipelines</span>
+      <span class="focus-arrow">&#8594;</span>
+    </li>
+  </ul>
 </section>
 
-<section>
-<h2>📫 Contact</h2>
-<p>Email: your-email@example.com</p>
-<p>LinkedIn: https://linkedin.com/in/your-profile</p>
+<section id="contact">
+  <div class="reveal">
+    <p class="sec-label">05 &mdash; Contact</p>
+    <h2 class="sec-title">Let's build something together</h2>
+  </div>
+  <div class="contact-wrap">
+    <div class="reveal left" style="transition-delay:0.08s;">
+      <p class="contact-pull">Have a project in mind? I'd love to hear about it.</p>
+      <p class="contact-note">Always open to interesting problems &mdash; whether it's a full build, a collaboration, or just a conversation about AI and systems.</p>
+    </div>
+    <div class="contact-fields reveal right" style="transition-delay:0.12s;">
+      <div class="contact-row">
+        <span class="c-label">Email</span>
+        <a href="mailto:your-email@example.com" class="c-val">your-email@example.com</a>
+      </div>
+      <div class="contact-row">
+        <span class="c-label">LinkedIn</span>
+        <a href="https://linkedin.com/in/your-profile" class="c-val" target="_blank">linkedin.com/in/your-profile</a>
+      </div>
+      <div class="contact-row">
+        <span class="c-label">GitHub</span>
+        <a href="https://github.com/your-username" class="c-val" target="_blank">github.com/your-username</a>
+      </div>
+    </div>
+  </div>
 </section>
 
 <footer>
-<p>Built with precision. Powered by curiosity.</p>
+  <div class="foot-left">
+    <span class="foot-brand">DevCodeSoham</span>
+    <span class="foot-copy">&copy; 2025 &mdash; All rights reserved</span>
+  </div>
+  <span class="foot-right">Built with precision. Powered by curiosity.</span>
 </footer>
+
+<script>
+const io = new IntersectionObserver((entries) => {
+  entries.forEach(e => {
+    if (e.isIntersecting) { e.target.classList.add('visible'); io.unobserve(e.target); }
+  });
+}, { threshold: 0.1 });
+document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+</script>
 
 </body>
 </html>
